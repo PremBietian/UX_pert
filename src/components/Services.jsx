@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SectionHeading from './SectionHeading';
 import ServiceCard from './ServiceCard';
+import ServiceDetailModal from './ServiceDetailModal';
 import { servicesData } from '../data/services';
 
 export default function Services({ onSelectService }) {
+  const [selectedDetailService, setSelectedDetailService] = useState(null);
+
   return (
     <section id="services" className="py-20 md:py-32 relative">
-      {/* Subtle background ambient light */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-950/20 rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute bottom-10 right-0 w-80 h-80 bg-indigo-950/20 rounded-full blur-[120px] pointer-events-none -z-10" />
+      {/* Background ambient lights */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-950/20 rounded-full blur-[160px] pointer-events-none -z-10" />
+      <div className="absolute bottom-10 right-0 w-80 h-80 bg-indigo-950/20 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -24,10 +27,21 @@ export default function Services({ onSelectService }) {
               key={service.id}
               service={service}
               onSelectService={onSelectService}
+              onOpenDetail={(srv) => setSelectedDetailService(srv)}
             />
           ))}
         </div>
       </div>
+
+      {/* Service Detail Interactive Modal */}
+      <ServiceDetailModal
+        isOpen={Boolean(selectedDetailService)}
+        service={selectedDetailService}
+        onClose={() => setSelectedDetailService(null)}
+        onStartProject={(serviceTitle) => {
+          onSelectService(serviceTitle);
+        }}
+      />
     </section>
   );
 }

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import CustomCursor from './components/CustomCursor';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
+import ProjectRegistrationModal from './components/ProjectRegistrationModal';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -14,6 +17,8 @@ import LegalModal from './components/LegalModal';
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [preselectedService, setPreselectedService] = useState('Web Development');
+  const [isProjectWizardOpen, setIsProjectWizardOpen] = useState(false);
+  const [wizardService, setWizardService] = useState('');
   const [legalModal, setLegalModal] = useState({ isOpen: false, type: 'privacy' });
 
   // Smooth scroll handler
@@ -33,7 +38,7 @@ export default function App() {
 
   // Scrollspy to update active navigation item
   useEffect(() => {
-    const sectionIds = ['home', 'services', 'work', 'about', 'contact'];
+    const sectionIds = ['home', 'services', 'work', 'process', 'about', 'contact'];
     
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
@@ -55,9 +60,14 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleStartProject = (serviceName = '') => {
+    setWizardService(serviceName);
+    setIsProjectWizardOpen(true);
+  };
+
   const handleSelectService = (serviceTitle) => {
     setPreselectedService(serviceTitle);
-    handleNavigate('#contact');
+    handleStartProject(serviceTitle);
   };
 
   const handleOpenLegal = (type) => {
@@ -69,17 +79,32 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white selection:bg-purple-600/30 selection:text-purple-200 relative">
+    <div className="min-h-screen bg-[#030305] text-white selection:bg-purple-600/30 selection:text-purple-200 relative">
+      {/* Subtle Custom Ambient Cursor */}
+      <CustomCursor />
+
+      {/* Floating Action WhatsApp Badge */}
+      <FloatingWhatsApp />
+
+      {/* Global 5-Step Project Registration Wizard Modal */}
+      <ProjectRegistrationModal
+        isOpen={isProjectWizardOpen}
+        onClose={() => setIsProjectWizardOpen(false)}
+        initialService={wizardService}
+      />
+
       {/* Top Navbar */}
       <Navbar
         activeSection={activeSection}
         onNavigate={handleNavigate}
+        onStartProject={handleStartProject}
       />
 
       {/* Main Content Sections */}
       <main>
         {/* Hero Section */}
         <Hero
+          onStartProject={handleStartProject}
           onNavigate={handleNavigate}
         />
 
@@ -105,11 +130,12 @@ export default function App() {
         {/* Contact Section */}
         <Contact
           preselectedService={preselectedService}
+          onStartProject={handleStartProject}
         />
 
         {/* Final CTA Banner */}
         <FinalCTA
-          onNavigate={handleNavigate}
+          onStartProject={handleStartProject}
         />
       </main>
 

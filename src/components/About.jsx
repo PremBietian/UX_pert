@@ -1,7 +1,8 @@
 import React from 'react';
 import SectionHeading from './SectionHeading';
 import TeamMember from './TeamMember';
-import { Code, Compass, Users } from 'lucide-react';
+import AgencyStatsDashboard from './AgencyStatsDashboard';
+import { Code, Compass } from 'lucide-react';
 
 export default function About() {
   return (
@@ -12,14 +13,14 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge="Who We Are"
-          title="About UXpert"
-          subtitle="Where creativity meets technology."
+          title="About UX_PERT"
+          subtitle="Where strategic thinking meets modern digital execution."
         />
 
-        {/* Agency Mission / Overview narrative */}
+        {/* Agency Overview Narrative */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-normal">
-            UXpert is a creative digital and media agency focused on helping businesses, brands and organizations build their digital presence. From web development and branding to video, social media, advertising and event management, our team brings different skills together to create complete solutions.
+            UX_PERT is a modern digital & media agency built to deliver complete end-to-end digital solutions. From custom web engineering and brand identities to video production, social media growth, targeted paid advertising, and live event management — we combine engineering precision with visual excellence.
           </p>
         </div>
 
@@ -29,8 +30,10 @@ export default function About() {
           <TeamMember
             name="Prem N Mahendrakar"
             title="Founder"
-            role="Web Development"
-            description="Leading UXpert with a focus on technology, digital solutions and business development."
+            role="Technology & Web Development"
+            description="Leading UX_PERT's technical engineering, digital platform architecture, and strategic growth."
+            phone="+91 7899422316"
+            waLink="https://wa.me/917899422316?text=Hi%20Prem,%20I'd%20like%20to%20discuss%20a%20project%20with%20UX_PERT."
             icon={Code}
           />
 
@@ -38,36 +41,17 @@ export default function About() {
           <TeamMember
             name="Raju Gumadal"
             title="Co-Founder"
-            role="Co-Founder"
-            description="Supporting UXpert's creative direction, operations and project execution."
+            role="Creative Direction & Operations"
+            description="Directing UX_PERT's creative media output, brand strategy, and multi-channel production execution."
+            phone="+91 8431487497"
+            waLink="https://wa.me/918431487497?text=Hi%20Raju,%20I'd%20like%20to%20discuss%20a%20project%20with%20UX_PERT."
             icon={Compass}
           />
         </div>
 
-        {/* Team Banner */}
-        <div className="mt-8 max-w-4xl mx-auto">
-          <div className="p-6 rounded-2xl bg-[#09090E] border border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-purple-950/60 border border-purple-800/40 flex items-center justify-center text-purple-400 shrink-0">
-                <Users className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-white">
-                  Extended Agency Capabilities
-                </p>
-                <p className="text-xs text-zinc-400">
-                  Supported by a team of 4 creative and technical professionals.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-zinc-900 border border-zinc-800 text-zinc-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                Cross-Functional Execution
-              </span>
-            </div>
-          </div>
+        {/* Agency Command Stats Dashboard */}
+        <div className="mt-16">
+          <AgencyStatsDashboard />
         </div>
 
       </div>
